@@ -1,0 +1,15 @@
+<!-- {{userName}}
+{{password}} -->
+
+<mat-form-field class="example-full-width">
+    <mat-label>Username</mat-label>
+    <input [(ngModel)]="userName" type="text" matInput>
+</mat-form-field>
+
+
+<mat-form-field class="example-full-width">
+    <mat-label>Password</mat-label>
+    <input [(ngModel)]="password" type="password" matInput>
+</mat-form-field>
+
+<button (click)="login()" mat-raised-button color="primary">Login</button>

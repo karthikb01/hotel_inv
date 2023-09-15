@@ -4,9 +4,9 @@ export class BookingDTO {
   guestEmail: string;
   checkinDate: Date;
   checkoutDate: Date;
-  bookingStatus: string;
+  bookingStatus? : string;
   bookingAmount: number;
-  bookingDate: Date;
+  bookingDate? : Date;
   mobileNumber: string;
   guestName: string;
   guestAddress: string;

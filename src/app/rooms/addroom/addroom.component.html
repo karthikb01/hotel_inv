@@ -1,0 +1,58 @@
+<h2>Add Room</h2>
+
+<!-- {{newRoom | json}} -->
+<!-- {{form.value | json}} -->
+<!-- {{form.pristine | json}} -->
+<!-- {{form.valid | json}} -->
+<!-- {{form.touched | json}} -->
+
+<div *ngIf="success" class="alert alert-danger">Room Added</div>
+
+
+<form #form="ngForm" (ngSubmit)="addRoom()" [ngFormOptions]="{ updateOn: 'blur' }">
+    <div class="form-group mt-3">
+        <input [(ngModel)]="newRoom.roomType" name="roomType" type="text" placeholder="Room Type *" class="form-control" required>
+    </div>
+
+    <div class="form-group mt-3">
+        <input [(ngModel)]="newRoom.amenities" name="amenities" type="text" placeholder="Amenities *" class="form-control" required>
+    </div>
+
+    <div class="form-group mt-3">
+        <input #price="ngModel"  [(ngModel)]="newRoom.price" min="1000" name="price" type="number" placeholder="Price *" class="form-control" required>
+    </div>
+    <div class="alert alert-danger" *ngIf="form.dirty && price.errors?.['min']">
+        Must be a minimum of 1000
+    </div>
+
+    <div class="form-group mt-3">
+        <input [(ngModel)]="newRoom.photos" name="photos" type="text" placeholder="Photos *" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+        <label class="mt-3">Check In Date *</label>
+        <input type="datetime-local"name="checkinTime" [(ngModel)]="newRoom.checkinTime" placeholder="Check In Time" class="form-control" required>
+
+        <label class="mt-3">Check Out Date *</label>
+        <input type="datetime-local" name="checkoutTime" [(ngModel)]="newRoom.checkoutTime" placeholder="Check Out Time" class="form-control" required>
+    </div>
+
+    <div class="form-group mt-3">
+        <input type="text" name="rating" [(ngModel)]="newRoom.rating" placeholder="Rating *" class="form-control" required>
+    </div>
+
+    <div  *ngIf="form.touched && form.invalid" class="alert alert-danger mt-3">
+        Fill all fields indicated with '*'
+    </div>
+
+    <div class="buttons">
+        <div class="form-group mt-3">
+            <button [disabled]="form.invalid" type="submit" class="btn btn-dark">Add Room</button>
+        </div>
+    
+        <div class="form-group mt-3 ms-3">
+            <button *ngIf="form.dirty" type="button" (click)="resetForm()" class="btn btn-outline-dark">Reset</button>
+        </div>
+    </div>
+
+</form>

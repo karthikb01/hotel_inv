@@ -1,0 +1,29 @@
+<h1>{{title}}</h1>
+<table class="table table-hover table-dark table-striped">
+    <thead  class="thead">
+        <tr>
+            <th>Room Number</th>
+            <th>Room Type</th>
+            <th>Ammenities</th>
+            <th>Price</th>
+            <th>CheckIn Time</th>
+            <th>Rating</th>
+            <th>Select Room</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr  *ngFor="let room of roomList">
+            <td>{{room.roomNumber}}</td>
+            <td>{{room.roomType}}</td>
+            <td>{{room.amenities}}</td>
+            <td>{{room.price | currency : "INR"}}</td>
+            <td>{{room.checkinTime | date : 'short'}}</td>
+            <td>{{room.rating | number : '1.1-1'}}</td>
+            <td>
+                <!-- <button (click)="selected(room)" class="btn btn-outline-light">Select</button> -->
+                <button [routerLink]="['book',room.roomNumber]" class="btn btn-outline-light">Book</button>
+                <!-- <button [routerLink]="['/booking',room.roomNumber]" class="btn btn-outline-light">Book</button> -->
+            </td>
+        </tr>
+    </tbody>
+</table>

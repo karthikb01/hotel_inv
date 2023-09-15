@@ -1,0 +1,20 @@
+<!-- {{bookings | json}} -->
+
+<table *ngIf="flag" class="table table-hover table-dark table-striped">
+  <thead class="thead">
+    <tr>
+      <th>Room Number</th>
+      <th>Check In Date</th>
+      <th>Check out Date</th>
+      <th>Booking Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let booking of bookings">
+      <td>{{booking.roomId}}</td>
+      <td>{{booking.checkinDate | date}}</td>
+      <td>{{booking.checkoutDate | date}}</td>
+      <td>{{booking.bookingAmount | currency : 'INR'}}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,10 @@
+<h1>Rooms</h1>
+
+<app-roomslist *ngIf="rooms$ | async as rooms" [roomList]="rooms" (selectRoom)="roomSelected($event)"></app-roomslist>
+
+
+<div *ngIf="selectedRoom">
+    {{selectedRoom | json}}
+</div>
+
+<router-outlet></router-outlet>
