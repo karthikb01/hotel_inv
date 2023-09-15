@@ -6,36 +6,38 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-  
-  constructor(private router : Router) { }
 
-  isLogin : boolean = false
+  constructor(private router: Router) { }
+
+  isLogin: boolean = false
   isAdmin: boolean = false
 
-  isLoggedIn(){ 
-    return this.isLogin
-  }
+  private loggedIn = new BehaviorSubject<boolean>(this.isLogin);
 
-  // private loggedIn = new BehaviorSubject<boolean>(false);
+  isLoggedIn() {
+    return this.loggedIn.asObservable()
+  }
 
   // get isLoggedIn() {
   //   return this.loggedIn.asObservable()
   // }
 
-  login(username : string, password : string){
-    if(username == "admin" && password == "admin"){
+  login(username: string, password: string) {
+    if (username == "admin" && password == "admin") {
       this.isLogin = true
       this.isAdmin = true
-    } else if(username == "user" && password == "user"){
+      this.loggedIn.next(true)
+    } else if (username == "user" && password == "user") {
       this.isLogin = true
-    } 
+      this.loggedIn.next(true)
+    }
     return this.isLogin
   }
 
-  logout(){
+  logout() {
     this.isLogin = false
     this.isAdmin = false
-    // this.loggedIn.next(false)
+    this.loggedIn.next(false)
 
     this.router.navigate([''])
     // this.loggedIn.next(false)

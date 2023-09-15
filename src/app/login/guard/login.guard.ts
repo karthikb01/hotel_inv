@@ -8,37 +8,26 @@ export const loginGuard: CanActivateFn = (route, state) => {
   const loginService = inject(LoginService)
   const dialog = inject(MatDialog)
   const router = inject(Router)
-  // if(!loginService.isLogin){
-  //   router.navigate(['login'])
+ 
+  // if (loginService.isLoggedIn())
+  //   return true
+   
+  // else{
+  //   dialog.open(LoginDialog, {restoreFocus: false});
+  //   return false
   // }
 
-  // let isLogin! : boolean
-  // loginService.isLoggedIn.subscribe((data) => {
-  //   if(data){
-  //     isLogin = true
-  //   } else {
-  //     isLogin = false 
-  //     router.navigate(['login'])
-  //     dialog.open(LoginDialog, {restoreFocus: false});
-  //   }
-  // })
-
-  // return isLogin
-
-
-  if (loginService.isLoggedIn())
-    return true
-   
-  else{
-    dialog.open(LoginDialog, {restoreFocus: false});
-    return false
+  if(!loginService.isLogin){
+    dialog.open(LoginDialog, {restoreFocus : false})
   }
+
+  return loginService.isLogin
 
   
 };
 
 @Component({
-  selector: 'dialog-from-menu-dialog',
+  selector: 'login-dialog',
   templateUrl: 'loginDialog.html',
   standalone: true,
   imports: [MatDialogModule, MatButtonModule],

@@ -9,20 +9,23 @@ import { LoginService } from '../login/login.service';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
-export class NavComponent implements OnInit{
+export class NavComponent implements OnInit {
 
 
-  isLoggedIn$! : Observable<boolean>;  
+  isLogin = false
 
   constructor(private loginService: LoginService) {
   }
 
   ngOnInit(): void {
+    this.loginService.isLoggedIn().subscribe({
+      next : (value) => this.isLogin = value 
+    })
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    
-
+  logout() {
+    this.loginService.logout()
+  }
 
 
   private breakpointObserver = inject(BreakpointObserver);

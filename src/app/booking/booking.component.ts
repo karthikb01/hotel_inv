@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Booking } from './booking';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-booking',
@@ -11,7 +13,7 @@ import { Booking } from './booking';
 })
 export class BookingComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private router : ActivatedRoute, private http : HttpClient) { }
+  constructor(private formBuilder: FormBuilder, private router : ActivatedRoute, private http : HttpClient, private route : Router, private dialog : MatDialog) { }
 
   bookingForm!: FormGroup
 
@@ -67,7 +69,7 @@ export class BookingComponent implements OnInit {
 
   resetForm(){
     this.bookingForm.reset({
-      roomId : this.router.snapshot.paramMap.get('id')
+      // roomId : this.router.snapshot.paramMap.get('id'),
     })
   }
 
@@ -95,10 +97,19 @@ export class BookingComponent implements OnInit {
       next : (data) => console.log(data),
       error : (value) => console.log(value),  
       complete : () => {
+        this.dialog.open(BookedDialog, {restoreFocus : false})
         this.resetForm()
-        // console.log("booked");
+        this.route.navigate(['/rooms/bookings'])
       }
     })
   }
 
 }
+
+@Component({
+  selector: 'booked-dialog',
+  templateUrl: 'bookedDialog.html',
+  standalone: true,
+  imports: [MatDialogModule, MatButtonModule],
+})
+export class BookedDialog { }

@@ -16,7 +16,7 @@ export const adminGuard: CanActivateFn = (route, state) => {
 };
 
 @Component({
-  selector: 'dialog-from-menu-dialog',
+  selector: 'admin-dialog',
   templateUrl: 'adminDialog.html',
   standalone: true,
   imports: [MatDialogModule, MatButtonModule],

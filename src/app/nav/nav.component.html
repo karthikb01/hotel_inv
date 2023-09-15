@@ -7,7 +7,7 @@
       <a mat-list-item  routerLink="rooms/add">Add Room</a>
       <!-- <a mat-list-item routerLink="booking">Book Room</a> -->
       <a mat-list-item  routerLink="rooms/bookings">Your Bookings</a>
-      <a mat-list-item *ngIf="isLoggedIn$ | async"  (click)="logout()">Logout</a>
+      <a mat-list-item *ngIf="isLogin"  (click)="logout()">Logout</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -21,6 +21,7 @@
     <!-- Add Content Here -->
     <div class="p-3">
       <router-outlet></router-outlet>
+      <!-- {{isLoggedIn$ | async | json}} -->
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

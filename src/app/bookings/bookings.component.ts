@@ -20,7 +20,7 @@ export class BookingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.bookingsService.getBookings().subscribe((data) => {
-      console.log(data.length);
+      // console.log(data.length);
 
       if (data.length == 0) {
         this.openDialog()
@@ -44,7 +44,7 @@ export class BookingsComponent implements OnInit {
 }
 
 @Component({
-  selector: 'dialog-from-menu-dialog',
+  selector: 'bookings-dialog',
   templateUrl: 'dialog.html',
   standalone: true,
   imports: [MatDialogModule, MatButtonModule],
